@@ -15,9 +15,19 @@ namespace SimpleValidator.Extensions
         /// </summary>
         /// <param name="value">The value to check</param>
         /// <returns>True if the value is null</returns>
-        public static bool IsNull(this string value)
+        public static bool IsNull(this object value)
         {
             return (value == null);
+        }
+
+        /// <summary>
+        /// Check if the integer is equal to zero
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool NotZero(this int value)
+        {
+            return (value != 0);
         }
 
         /// <summary>
@@ -63,6 +73,27 @@ namespace SimpleValidator.Extensions
             else
             {
                 string exp = @"^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-||_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+([a-z]+|\d|-|\.{0,1}|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])?([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))$";
+
+                return new Regex(exp, RegexOptions.IgnoreCase).IsMatch(value);
+            }
+        }
+
+        /// <summary>
+        /// Checks if the current value is a password. The password must be at least 8 characters, at least 1 uppercase character, at least 1 lowercase character, at least one number and a maximum of 15 characters.
+        /// It uses the following regular expression
+        /// ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsPassword(this string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return false; // if it's null it cannot possibly be a password
+            }
+            else
+            {
+                string exp = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
 
                 return new Regex(exp, RegexOptions.IgnoreCase).IsMatch(value);
             }
