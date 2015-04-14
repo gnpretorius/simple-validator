@@ -99,6 +99,19 @@ namespace SimpleValidator.Extensions
             }
         }
 
+        public static bool IsMatch(this string value, string compare)
+        {
+            if (value.IsNull() && compare.IsNull())
+            {
+                return true;
+            }
+            if (value.IsNull() || compare.IsNull())
+            {
+                return false;
+            }
+            return String.Equals(value, compare, StringComparison.Ordinal);
+        }
+
         public static bool IsLength(this string value, int min)
         {
             if (value.IsNullOrEmpty())

@@ -174,32 +174,32 @@ namespace SimpleValidator
 
         #endregion
 
-        //#region " IsMatch "
+        #region " IsMatch "
 
-        //public Validator IsMatch(string value, string compare)
-        //{
-        //    return IsMatch("", value);
-        //}
+        public Validator IsMatch(string value, string compare)
+        {
+            return IsMatch("", value, compare);
+        }
 
-        //public Validator IsMatch(string name, string value, string compare)
-        //{
-        //    return IsMatch(name, value, string.Format(Messages.IsPasswordMessage, name));
-        //}
+        public Validator IsMatch(string name, string value, string compare)
+        {
+            return IsMatch(name, value, compare, string.Format(Messages.IsMatchMessage, name));
+        }
 
-        //public Validator IsMatch(string name, string value, string compare, string message)
-        //{
-        //    // do the check
-        //    if (!value.IsPassword())
-        //    {
-        //        return AddError(name, message);
-        //    }
-        //    else
-        //    {
-        //        return NoError();
-        //    }
-        //}
+        public Validator IsMatch(string name, string value, string compare, string message)
+        {
+            // do the check
+            if (!value.IsMatch(compare))
+            {
+                return AddError(name, message);
+            }
+            else
+            {
+                return NoError();
+            }
+        }
 
-        //#endregion
+        #endregion
 
         #region " IsLength "
 
