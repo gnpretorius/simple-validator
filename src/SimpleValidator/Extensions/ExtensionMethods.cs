@@ -15,9 +15,19 @@ namespace SimpleValidator.Extensions
         /// </summary>
         /// <param name="value">The value to check</param>
         /// <returns>True if the value is null</returns>
-        public static bool IsNull(this string value)
+        public static bool IsNull(this object value)
         {
             return (value == null);
+        }
+
+        /// <summary>
+        /// Check if the integer is equal to zero
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool NotZero(this int value)
+        {
+            return (value != 0);
         }
 
         /// <summary>
@@ -66,6 +76,40 @@ namespace SimpleValidator.Extensions
 
                 return new Regex(exp, RegexOptions.IgnoreCase).IsMatch(value);
             }
+        }
+
+        /// <summary>
+        /// Checks if the current value is a password. The password must be at least 8 characters, at least 1 uppercase character, at least 1 lowercase character, at least one number and a maximum of 15 characters.
+        /// It uses the following regular expression
+        /// ^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$
+        /// </summary>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        public static bool IsPassword(this string value)
+        {
+            if (value.IsNullOrEmpty())
+            {
+                return false; // if it's null it cannot possibly be a password
+            }
+            else
+            {
+                string exp = @"^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,15}$";
+
+                return new Regex(exp, RegexOptions.IgnoreCase).IsMatch(value);
+            }
+        }
+
+        public static bool IsMatch(this string value, string compare)
+        {
+            if (value.IsNull() && compare.IsNull())
+            {
+                return true;
+            }
+            if (value.IsNull() || compare.IsNull())
+            {
+                return false;
+            }
+            return String.Equals(value, compare, StringComparison.Ordinal);
         }
 
         public static bool IsLength(this string value, int min)
