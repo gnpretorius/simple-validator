@@ -8,6 +8,6 @@ namespace SimpleValidator.Constants
     public class Messages
     {
         public const string NotEmptyMessage = "'{0}' is empty.";
-        public const string NotValidEmail = "The email address is invalid.";
+        public const string NotValidEmail = "'{0}' is not a valid email address.";
     }
 }
