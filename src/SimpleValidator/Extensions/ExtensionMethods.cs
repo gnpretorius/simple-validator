@@ -53,7 +53,7 @@ namespace SimpleValidator.Extensions
         /// </summary>
         /// <param name="value">The value to check</param>
         /// <returns>True if the value is null or empty</returns>
-        public static bool IsNullOrEmpty(this string value) // this is a shortcut method to the above
+        public static bool IsNullOrEmpty(this string value)
         {
             return value.IsEmpty();
         }
