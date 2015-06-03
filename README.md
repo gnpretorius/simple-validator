@@ -40,4 +40,47 @@ validator
 ```
 
 This is quite usefull for more complex object validation e.g.
+```
+// validate the name
+validator
+    .NotNull(name)
+        .WithMessage("Name cannot be an empty string")
+    .IsLength(name, 5)
+        .WithMessage("Name must be at least 5 characters long")
+    .IsLength(name, 5, 20)
+        .WithMessage("Name must between 5 and 20 characters")
+    .Must(() =>
+        {
+            return name.Contains("abc");
+        }).WithMessage("Name cannot contain abc")
+    .MustNot(() =>
+        {
+            return name.Contains("bob");
+        }).WithMessage("Name cannot contain bob");
+```
 
+Each of the messages are added to an Error collection within the validator object. It also has a ```IsValid``` property. The validation is done as the method is called, which means you can stagger the validation is needed e.g. 
+
+```
+string name = "Gordon";
+
+// validate the name
+validator
+    .NotNull(name).WithMessage("Name cannot be an empty string");
+
+if (validator.IsValid)
+{
+    // do something here that is dependant on name not being null
+
+    validator.Must(() =>
+    {
+        // some other condition
+        return true;
+    });
+
+    if (validator.IsValid)
+    {
+        // and down the rabit hole we go...
+    }
+}
+```
