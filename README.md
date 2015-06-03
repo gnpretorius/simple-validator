@@ -45,12 +45,9 @@ This is quite usefull for more complex object validation e.g.
 ```
 // validate the name
 validator
-    .NotNull(name)
-        .WithMessage("Name cannot be an empty string")
-    .IsLength(name, 5)
-        .WithMessage("Name must be at least 5 characters long")
-    .IsLength(name, 5, 20)
-        .WithMessage("Name must between 5 and 20 characters")
+    .NotNull(name).WithMessage("Name cannot be an empty string")
+    .IsLength(name, 5).WithMessage("Name must be at least 5 characters long")
+    .IsLength(name, 5, 20).WithMessage("Name must between 5 and 20 characters")
     .Must(() =>
         {
             return name.Contains("abc");
