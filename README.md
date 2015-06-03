@@ -20,6 +20,8 @@ email.IsEmail()
 email.IsMatch("test2@email.com")
 ```
 
+## Validator
+
 Taking it a bit further, let's create a validator object. From there you can use it to validate several properties of an object with a few overrides as shown below
 
 ```
