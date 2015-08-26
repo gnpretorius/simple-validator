@@ -2,11 +2,12 @@
 using SimpleValidator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using SimpleValidator.Extensions;
 
 namespace SimpleValidator.Tests
 {
 	[TestClass]
-	public class EmailTests
+	public class Validator_IsEmail_Tests
 	{
 		[TestMethod]
 		public void Test_Invalid_Email()
@@ -16,6 +17,8 @@ namespace SimpleValidator.Tests
 			Validator validator = new Validator();
 
 			validator.IsEmail(email);
+
+            System.Diagnostics.Debug.WriteLine(validator.Errors.Count);
 
 			Assert.IsTrue(validator.Errors.Count == 1);
 		}

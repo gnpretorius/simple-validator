@@ -39,12 +39,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants\Messages.cs" />
     <Compile Include="Extensions\ExtensionMethods.cs" />
+    <Compile Include="Messages\LanguageCodes.cs" />
+    <Compile Include="Messages\MessageContainer.cs" />
+    <Compile Include="Messages\MessageFactory.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Results\ValidationError.cs" />
     <Compile Include="Results\ValidationMethodResult.cs" />
     <Compile Include="Validator.cs" />
+    <Compile Include="Validator.Dates.cs" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
