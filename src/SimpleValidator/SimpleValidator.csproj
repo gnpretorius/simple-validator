@@ -39,6 +39,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Extensions\ExtensionMethods.cs" />
     <Compile Include="Messages\LanguageCodes.cs" />
     <Compile Include="Messages\MessageContainer.cs" />
@@ -49,7 +50,9 @@
     <Compile Include="Validator.cs" />
     <Compile Include="Validator.Dates.cs" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Utilities\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

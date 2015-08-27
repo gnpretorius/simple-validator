@@ -147,20 +147,20 @@ namespace SimpleValidator
 
         #region " IsNotEmpty "
 
-        public Validator IsNotEmpty(string value)
+        public Validator IsNullOrWhiteSpace(string value)
         {
-            return IsNotEmpty("", value);
+            return IsNullOrWhiteSpace("", value);
         }
 
-        public Validator IsNotEmpty(string name, string value)
+        public Validator IsNullOrWhiteSpace(string name, string value)
         {
-            return IsNotEmpty(name, value, string.Format(MessageContainer.IsNotNullOrEmptyMessage, name));
+            return IsNullOrWhiteSpace(name, value, string.Format(MessageContainer.IsNotNullOrWhiteSpaceMessage, name));
         }
 
-        public Validator IsNotEmpty(string name, string value, string message)
+        public Validator IsNullOrWhiteSpace(string name, string value, string message)
         {
             // do the check
-            if (value.IsNotNullOrEmpty())
+            if (value.IsNotNullOrWhiteSpace())
             {
                 return NoError();
             }
@@ -500,6 +500,11 @@ namespace SimpleValidator
             _LastError = error;
 
             return this;
+        }
+
+        public void ThrowValidationException()
+        {
+            throw new Exceptions.ValidationException(this);
         }
 
         protected Validator NoError()
