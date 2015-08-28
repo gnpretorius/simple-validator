@@ -6,6 +6,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using SimpleValidator.Messages;
+using SimpleValidator.Interfaces;
 
 namespace SimpleValidator
 {
@@ -465,6 +466,33 @@ namespace SimpleValidator
             else
             {
                 return NoError();
+            }
+        }
+
+        #endregion
+
+        #region " IsRule "
+
+        public Validator IsRule(IRule rule)
+        {
+            return IsRule("", rule);
+        }
+
+        public Validator IsRule(string name, IRule rule)
+        {
+            return IsRule(name, rule, MessageContainer.IsRuleMessage);
+        }
+
+        public Validator IsRule(string name, IRule rule, string message)
+        {
+            // do the check
+            if (name.IsRule(rule))
+            {
+                return NoError();
+            }
+            else
+            {
+                return AddError(name, message);
             }
         }
 

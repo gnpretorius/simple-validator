@@ -41,7 +41,8 @@ namespace SimpleValidator.Messages
                         IsEmailMessage = "'{0}' is not a valid email address.",
                         IsRegexMessage = "'{0}' does not match the provided regular expression.",
                         IsMatchMessage = "'{0}' did not match the specified criteria.",
-                        IsDateMessage = "'{0}' is not a valid date."
+                        IsDateMessage = "'{0}' is not a valid date.",
+                        IsRuleMessage = "'{0}' failed the provided business rule provided."
                     };
 
                 default:

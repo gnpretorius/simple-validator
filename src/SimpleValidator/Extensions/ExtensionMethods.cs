@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SimpleValidator.Interfaces;
+using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -310,6 +311,21 @@ namespace SimpleValidator.Extensions
             return !func();
         }
 
+        #region " IsRule "
+
+        /// <summary>
+        /// Pass in an instance of an object that implements IRule
+        /// </summary>
+        /// <param name="value"></param>
+        /// <param name="rule"></param>
+        /// <returns></returns>
+        public static bool IsRule(this object value, IRule rule)
+        {
+            return rule.IsValid();
+        }
+
+        #endregion
+
         #endregion
 
         #region " Integer "
@@ -457,7 +473,7 @@ namespace SimpleValidator.Extensions
                 return value;
             }
         }
-        
+
         #endregion
 
         #region " GetName "

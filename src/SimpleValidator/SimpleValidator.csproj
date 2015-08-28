@@ -41,6 +41,7 @@
   <ItemGroup>
     <Compile Include="Exceptions\ValidationException.cs" />
     <Compile Include="Extensions\ExtensionMethods.cs" />
+    <Compile Include="Interfaces\IRule.cs" />
     <Compile Include="Messages\LanguageCodes.cs" />
     <Compile Include="Messages\MessageContainer.cs" />
     <Compile Include="Messages\MessageFactory.cs" />

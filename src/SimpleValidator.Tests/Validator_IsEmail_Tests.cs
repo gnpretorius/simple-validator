@@ -35,7 +35,7 @@ namespace SimpleValidator.Tests
 				"v@.co", // invalid
 				"v@v" // invalid
 			};
-
+            
 			Validator validator = new Validator();
 
 			foreach (var email in emails)
