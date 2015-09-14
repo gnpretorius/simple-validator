@@ -61,6 +61,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Validator_Is_Tests.cs" />
     <Compile Include="Validator_IsNotNull_Tests.cs" />
     <Compile Include="Extensions_IsNotNull_Tests.cs" />
     <Compile Include="Validator_IsMatch_Tests.cs" />

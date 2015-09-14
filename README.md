@@ -10,7 +10,7 @@ Include the following using statement:
 
 ```using SimpleValidator.Extensions;```
 
-Then you should have some usefull helper methods as shown below:
+Then you should have some useful helper methods as shown below:
 
 ```
 string email = "test@email.com";
@@ -18,6 +18,32 @@ string email = "test@email.com";
 email.IsLength(5)
 email.IsEmail()
 email.IsMatch("test2@email.com")
+```
+
+The full list of extension methods is as follows:
+
+```
+// string based extension methods (IsNotNullOrEmpty and IsNotNullOrWhiteSpace are the only methods that have inverse tests. The assumption is to always assume the positive.
+[string].IsNotNullOrEmpty();
+[string].IsNullOrEmpty();
+[string].IsNotNullOrWhiteSpace();
+[string].IsNullOrWhiteSpace();
+[string].IsBetweenLength(int min, int max);
+[string].IsMaxLength(int max);
+[string].IsMinLength(int min);
+[string].IsExactLength(int length);
+[string].IsEmail()
+[string].IsPassword()
+[string].IsCreditCard()
+[string].IsMatch()
+
+// object based extension methods
+[object].IsNotNull()
+[object].IsNull()
+[object].Is()
+[object].IsNot()
+
+
 ```
 
 ## Validator

@@ -560,5 +560,129 @@ namespace SimpleValidator.Extensions
         }
 
         #endregion
+
+        #region " Is "
+
+        public static bool Is<T>(this object value)
+        {
+            if (value == null)
+            {
+                return false;
+            }
+
+            var converter = System.ComponentModel.TypeDescriptor.GetConverter(typeof(T));
+
+            try
+            {
+                T result = (T)converter.ConvertFromString(value.ToString());
+                return result != null;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public static bool IsInt(this object value)
+        {
+            return value.Is<int>();
+        }
+
+        public static bool IsShort(this object value)
+        {
+            return value.Is<short>();
+        }
+
+        public static bool IsLong(this object value)
+        {
+            return value.Is<long>();
+        }
+
+        public static bool IsDouble(this object value)
+        {
+            return value.Is<Double>();
+        }
+
+        public static bool IsDecimal(this object value)
+        {
+            return value.Is<Decimal>();
+        }
+
+        public static bool IsBool(this object value)
+        {
+            return value.Is<bool>();
+        }
+
+        public static bool IsNumber(this object value)
+        {
+            return
+                value.Is<Int32>() ||
+                value.Is<Double>() ||
+                value.Is<Decimal>();
+        }
+
+        #endregion
+
+        #region " To "
+
+        public static T To<T>(this object value)
+        {
+            return value.To<T>(default(T));
+        }
+
+        public static T To<T>(this object value, T fallback)
+        {
+            if (value == null)
+            {
+                return fallback;
+            }
+
+            var converter = System.ComponentModel.TypeDescriptor.GetConverter(typeof(T));
+            if (converter != null)
+            {
+                try
+                {
+                    return (T)converter.ConvertFromString(value.ToString());
+                }
+                catch (Exception)
+                {
+                    return fallback;
+                }
+
+            }
+            return fallback;
+        }
+
+        public static int ToInt(this object value, int fallback = default(int))
+        {
+            return value.To<int>(fallback);
+        }
+
+        public static short ToShort(this object value, short fallback = default(short))
+        {
+            return value.To<short>(fallback);
+        }
+
+        public static long ToLong(this object value, long fallback = default(long))
+        {
+            return value.To<long>(fallback);
+        }
+
+        public static double ToDouble(this object value, double fallback = default(double))
+        {
+            return value.To<double>(fallback);
+        }
+
+        public static decimal ToDecimal(this object value, decimal fallback = default(decimal))
+        {
+            return value.To<decimal>(fallback);
+        }
+
+        public static bool ToBool(this object value, bool fallback = default(bool))
+        {
+            return value.To<bool>(fallback);
+        }
+
+        #endregion
     }
 }
