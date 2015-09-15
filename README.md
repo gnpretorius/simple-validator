@@ -1,50 +1,23 @@
 # SimpleValidator
+
 A simple .Net validation library written in C#
 
 It's based largely on the [FluentValidation](https://github.com/JeremySkinner/FluentValidation) libary with some changes in it's usage. 
 
-## Extension methods
-As a start, there are some simple extension method you can use. 
+##Why SimpleValidator?
 
-Include the following using statement:
+I needed a validation library that satisfied the following criteria:
 
-```using SimpleValidator.Extensions;```
+- Quick simple validation checks
+- Complex business rule validation
+- Multiple stages of validation (i.e. do the simple stuff first, then more complex validation, but don't bother with the complex stuff if the simple stuff fails)
+- Avoid attribute based validation (I try to avoid using attributes. People think, I've validated my MVC model so my service method should be good to good. Not the case. Service methods should always validate everything as you cannot guarantee validation has been performed)
+- Readable
+- Central
 
-Then you should have some useful helper methods as shown below:
+What I came up with was the following...
 
-```
-string email = "test@email.com";
-
-email.IsLength(5)
-email.IsEmail()
-email.IsMatch("test2@email.com")
-```
-
-The full list of extension methods is as follows:
-
-```
-// string based extension methods (IsNotNullOrEmpty and IsNotNullOrWhiteSpace are the only methods that have inverse tests. The assumption is to always assume the positive.
-[string].IsNotNullOrEmpty();
-[string].IsNullOrEmpty();
-[string].IsNotNullOrWhiteSpace();
-[string].IsNullOrWhiteSpace();
-[string].IsBetweenLength(int min, int max);
-[string].IsMaxLength(int max);
-[string].IsMinLength(int min);
-[string].IsExactLength(int length);
-[string].IsEmail()
-[string].IsPassword()
-[string].IsCreditCard()
-[string].IsMatch()
-
-// object based extension methods
-[object].IsNotNull()
-[object].IsNull()
-[object].Is()
-[object].IsNot()
-
-
-```
+As there is quite a bit to cover I'm going to start simply, and add complexity. 
 
 ## Validator
 
@@ -108,4 +81,46 @@ if (validator.IsValid)
         // and down the rabit hole we go...
     }
 }
+```
+
+## Extension methods
+As a start, there are some simple extension method you can use. 
+
+Include the following using statement:
+
+```using SimpleValidator.Extensions;```
+
+Then you should have some useful helper methods as shown below:
+
+```
+string email = "test@email.com";
+
+email.IsLength(5)
+email.IsEmail()
+email.IsMatch("test2@email.com")
+```
+
+The full list of extension methods is as follows:
+
+```
+// string based extension methods (IsNotNullOrEmpty and IsNotNullOrWhiteSpace are the only methods that have inverse tests. The assumption is to always assume the positive.
+[string].IsNotNullOrEmpty();
+[string].IsNullOrEmpty();
+[string].IsNotNullOrWhiteSpace();
+[string].IsNullOrWhiteSpace();
+[string].IsBetweenLength(int min, int max);
+[string].IsMaxLength(int max);
+[string].IsMinLength(int min);
+[string].IsExactLength(int length);
+[string].IsEmail()
+[string].IsPassword()
+[string].IsCreditCard()
+[string].IsMatch()
+
+// object based extension methods
+[object].IsNotNull()
+[object].IsNull()
+[object].IsNot()
+
+
 ```
