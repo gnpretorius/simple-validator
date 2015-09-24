@@ -3,7 +3,9 @@ using SimpleValidator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
 using System.Linq;
+using Microsoft.Win32;
 using SimpleValidator.Extensions;
+using SimpleValidator.Results;
 
 namespace SimpleValidator.Tests
 {

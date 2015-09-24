@@ -281,7 +281,7 @@ namespace SimpleValidator
 
         #endregion
 
-        #region " IsMatch "
+        #region " IsEqualTo "
 
         public Validator IsMatch(string value, string compare)
         {
@@ -296,7 +296,7 @@ namespace SimpleValidator
         public Validator IsMatch(string name, string value, string compare, string message)
         {
             // do the check
-            if (!value.IsMatch(compare))
+            if (!value.IsEqualTo(compare))
             {
                 return AddError(name, message);
             }
@@ -533,6 +533,14 @@ namespace SimpleValidator
         public void ThrowValidationException()
         {
             throw new Exceptions.ValidationException(this);
+        }
+
+        public void ThrowValidationExceptionIfInvalid()
+        {
+            if (!IsValid)
+            {
+                throw new Exceptions.ValidationException(this);
+            }
         }
 
         protected Validator NoError()

@@ -2,6 +2,8 @@
 using SimpleValidator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
+using System.Net;
+using SimpleValidator.Exceptions;
 using SimpleValidator.Extensions;
 
 namespace SimpleValidator.Tests
@@ -12,7 +14,8 @@ namespace SimpleValidator.Tests
 		[TestMethod]
 		public void Test_Invalid_Email()
 		{
-			string email = "InvalidEmail";
+
+            string email = "InvalidEmail";
 
 			Validator validator = new Validator();
 

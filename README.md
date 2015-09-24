@@ -138,7 +138,8 @@ It supports chaining so you could write it as follows
 validator
   .IsEmail("test@email.com")
   .IsEmail("Email", "test@email.com")
-  .IsEmail("Email", "test@email.com", "Please enter a valid email address");
+  .IsEmail("Email", "test@email.com");
+     .WithMessage("The email address field provided is not valid")
 ```
 
 This is quite usefull for more complex object validation e.g.
@@ -158,7 +159,7 @@ validator
         }).WithMessage("Name cannot contain bob");
 ```
 
-Each of the messages are added to an Error collection within the validator object. It also has a ```IsValid``` property. The validation is done as the method is called, which means you can stagger the validation is needed e.g. 
+Each of the messages are added to an Error collection within the validator object. It also has a ```IsValid``` property. The validation is done as the method is called, which means you can stagger the validation if needed e.g. 
 
 ```
 string name = "Gordon";
@@ -184,4 +185,111 @@ if (validator.IsValid)
 }
 ```
 
+### IRule
+
+For more complex validation you can use the ```Is``` and ```IsNot``` validation methods passing in a function which should return a bool. For more serious business rule validations, 
+you can pass in any object implementing the ```IRule``` interface to the ```IsRule(...)``` method. All this combined gives you some flexibility on how you go about implementing your validation. 
+
+Point is, every service method should implement validation for every incoming model. 
+
+Ok, I have validation errors, now what?
+
+## Implementation
+
+Let's say we have a method
+
+```
+private User AddUser(UserModel user)
+{
+}
+```
+
+You pass in a ```UserModel```, and if all goes well, the user is added and it returns a ```User``` object. 
+
+What happens if we encounter validation errors? Once approach is to throw an exception (Not ideal but works) and the library has an exception ready for this.
+
+### ValidationException
+
+```
+
+try
+{
+    // ...
+    ServiceManager.AddUser(model);
+    // ...
+}
+catch (ValidationException ex)
+{
+    // validation error - The validator is passed in as part of the exception so you can access the errors ex.Validator.Errors
+}
+catch (Exception ex)
+{
+    // something else... woops
+}
+
+```
+
+And in your validation method. 
+
+```
+private User AddUser(UserModel user)
+{
+    Validator validator = new Validator();
+    // validation happens here...
+    
+    if (!validator.IsValid)
+    {
+        validator.ThrowValidationException();
+    }
+
+    // or you can do this without the IsValid check (it checks it internally)
+    validator.ThrowValidationExceptionIfInvalid();
+}
+```
+### ValidationMethodResult
+
+Another approach is to use the ```ValidationMethodResult```. Changing the above code it now looks as follows
+
+```
+public ValidationMethodResult<User> AddUser(UserModel model)
+{
+    Validator validator = new Validator();
+
+    // do validation
+
+    return new ValidationMethodResult<User>(validator, user);
+}
+
+```
+
+And then in your calling method
+
+```
+try
+{
+    // ...
+    var result = ServiceManager.AddUser(model);
+    
+    if (result.IsValid())
+    {
+        // all good
+    }
+    else
+    {
+        // show errors using result.Errors
+    }
+
+    // ...
+}
+catch (Exception ex)
+{
+    // something else... woops
+}
+
+```
+
+It's a cleaner approach, allows you to specify complex return types and provides a boolean indication reflecting the validation state of the current object. You could use simple out param's and use a boolean return 
+type for all methods, but I'm not a fun (That doesn't mean it's not right)
+
+ 
 

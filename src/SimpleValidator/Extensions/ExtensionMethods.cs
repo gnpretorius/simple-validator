@@ -250,7 +250,7 @@ namespace SimpleValidator.Extensions
         /// <param name="value"></param>
         /// <param name="compare"></param>
         /// <returns></returns>
-        public static bool IsMatch(this string value, string compare)
+        public static bool IsEqualTo(this string value, string compare)
         {
             if (value.IsNull() && compare.IsNull())
             {
