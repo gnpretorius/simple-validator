@@ -1,50 +1,26 @@
-﻿using SimpleValidator.Extensions;
+﻿using SimpleValidator.Constants;
+using SimpleValidator.Extensions;
 using SimpleValidator.Results;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
-using SimpleValidator.Messages;
-using SimpleValidator.Interfaces;
 
 namespace SimpleValidator
 {
-    /// <summary>
-    /// Always use the positive route i.e. a true result should indicate validity therefore generally prefix with "Is"
-    /// e.g. This field is not zero
-    /// </summary>
-    public partial class Validator
+    public class Validator
     {
-        #region " Constructor "
-
         /// <summary>
         /// Validate properties and types using this class
         /// </summary>
         public Validator()
         {
             Errors = new List<ValidationError>();
-            MessageContainer = MessageFactory.Create();
         }
-
-        public Validator(LanguageCodes code)
-        {
-            Errors = new List<ValidationError>();
-            MessageContainer = MessageFactory.Create(code);
-        }
-
-        public Validator(MessageContainer container)
-        {
-            Errors = new List<ValidationError>();
-            MessageContainer = container;
-        }
-
-        #endregion
 
         #region " Properties "
 
-        public MessageContainer MessageContainer { get; set; }
-       
         private ValidationError _LastError = null;
 
         public bool IsValid
@@ -59,142 +35,32 @@ namespace SimpleValidator
 
         #region " Validation Errors "
 
-        /// <summary>
-        /// The full list of errors currently available
-        /// </summary>
         public List<ValidationError> Errors { get; set; }
 
-        /// <summary>
-        /// Returns a list of errors with the specified name
-        /// </summary>
-        /// <param name="name"></param>
-        /// <returns></returns>
-        public List<ValidationError> ErrorByName(string name)
-        {
-            return Errors.Where(o => o.Name == name).ToList();
-        }
-
-        /// <summary>
-        /// This will return a unique set of Errors by Name and return the first instance of each error.
-        /// </summary>
-        public List<ValidationError> UniqueErrors
-        {
-            get
-            {
-                return Errors
-                    .GroupBy(o => o.Name)
-                    .Select(o => o.First())
-                    .ToList();
-            }
-        }
-
         #endregion
 
-        #region " Validation Methods "
+        #region " NotNull "
 
-        #region " IsNotNull "
-
-        public Validator IsNotNull(object value)
+        public Validator NotNull(object value)
         {
-            return IsNotNull("", value);
+            return NotNull("", value);
         }
 
-        public Validator IsNotNull(string name, object value)
+        public Validator NotNull(string name, object value)
         {
-            return IsNotNull(name, value, string.Format(MessageContainer.IsNotNullMessage, name));
+            return NotNull(name, value, string.Format(Messages.NotNullMessage, name));
         }
 
-        public Validator IsNotNull(string name, object value, string message)
+        public Validator NotNull(string name, object value, string message)
         {
             // do the check
-            if (value.IsNotNull())
-            {
-                return NoError();
-            }
-            else
+            if (value.IsNull())
             {
                 return AddError(name, message);
             }
-        }
-
-        #endregion
-
-        #region " IsNotNullOrEmpty "
-
-        public Validator IsNotNullOrEmpty(string value)
-        {
-            return IsNotNullOrEmpty("", value);
-        }
-
-        public Validator IsNotNullOrEmpty(string name, string value)
-        {
-            return IsNotNullOrEmpty(name, value, string.Format(MessageContainer.IsNotNullOrEmptyMessage, name));
-        }
-
-        public Validator IsNotNullOrEmpty(string name, string value, string message)
-        {
-            // do the check
-            if (value.IsNotNullOrEmpty())
-            {
-                return NoError();
-            }
             else
             {
-                return AddError(name, message);
-            }
-        }
-
-        #endregion
-
-        #region " IsNotEmpty "
-
-        public Validator IsNullOrWhiteSpace(string value)
-        {
-            return IsNullOrWhiteSpace("", value);
-        }
-
-        public Validator IsNullOrWhiteSpace(string name, string value)
-        {
-            return IsNullOrWhiteSpace(name, value, string.Format(MessageContainer.IsNotNullOrWhiteSpaceMessage, name));
-        }
-
-        public Validator IsNullOrWhiteSpace(string name, string value, string message)
-        {
-            // do the check
-            if (value.IsNotNullOrWhiteSpace())
-            {
                 return NoError();
-            }
-            else
-            {
-                return AddError(name, message);
-            }
-        }
-
-        #endregion
-
-        #region " IsEmail "
-
-        public Validator IsEmail(string value)
-        {
-            return IsEmail("", value);
-        }
-
-        public Validator IsEmail(string name, string value)
-        {
-            return IsEmail(name, value, string.Format(MessageContainer.IsEmailMessage, name));
-        }
-
-        public Validator IsEmail(string name, string value, string message)
-        {
-            // do the check
-            if (value.IsEmail())
-            {
-                return NoError();
-            }
-            else
-            {
-                return AddError(name, message);
             }
         }
 
@@ -209,13 +75,13 @@ namespace SimpleValidator
 
         public Validator NotZero(string name, int value)
         {
-            return NotZero(name, value, string.Format(MessageContainer.IsNotZeroMessage, name));
+            return NotZero(name, value, string.Format(Messages.NotZeroMessage, name));
         }
 
         public Validator NotZero(string name, int value, string message)
         {
             // do the check
-            if (value.IsNotZero())
+            if (value.NotZero())
             {
                 return NoError();
             }
@@ -227,34 +93,61 @@ namespace SimpleValidator
 
         #endregion
 
-        #region " IsRegex "
+        #region " NotEmpty "
 
-        public Validator IsRegex(string value, string exp)
+        public Validator NotEmpty(string value)
         {
-            return IsRegex("", value, exp);
+            return NotEmpty("", value);
         }
 
-        public Validator IsRegex(string name, string value, string exp)
+        public Validator NotEmpty(string name, string value)
         {
-            return IsRegex(name, value, exp, string.Format(MessageContainer.IsRegexMessage, name));
+            return NotEmpty(name, value, string.Format(Messages.NotEmptyMessage, name));
         }
 
-        public Validator IsRegex(string name, string value, string exp, string message)
+        public Validator NotEmpty(string name, string value, string message)
         {
             // do the check
-            if (value.IsRegex(exp))
+            if (value.IsEmpty())
             {
-                return NoError();
+                return AddError(name, message);
             }
             else
             {
-                return AddError(name, message);
+                return NoError();
             }
         }
 
         #endregion
 
-        #region " IsPassword "
+        #region " IsEmail "
+
+        public Validator IsEmail(string value)
+        {
+            return IsEmail("", value);
+        }
+
+        public Validator IsEmail(string name, string value)
+        {
+            return IsEmail(name, value, string.Format(Messages.IsEmailMessage, name));
+        }
+
+        public Validator IsEmail(string name, string value, string message)
+        {
+            // do the check
+            if (!value.IsEmail())
+            {
+                return AddError(name, message);
+            }
+            else
+            {
+                return NoError();
+            }
+        }
+
+        #endregion
+
+        #region " IsEmail "
 
         public Validator IsPassword(string value)
         {
@@ -263,7 +156,7 @@ namespace SimpleValidator
 
         public Validator IsPassword(string name, string value)
         {
-            return IsPassword(name, value, string.Format(MessageContainer.IsPasswordMessage, name));
+            return IsPassword(name, value, string.Format(Messages.IsPasswordMessage, name));
         }
 
         public Validator IsPassword(string name, string value, string message)
@@ -281,7 +174,7 @@ namespace SimpleValidator
 
         #endregion
 
-        #region " IsEqualTo "
+        #region " IsMatch "
 
         public Validator IsMatch(string value, string compare)
         {
@@ -290,13 +183,13 @@ namespace SimpleValidator
 
         public Validator IsMatch(string name, string value, string compare)
         {
-            return IsMatch(name, value, compare, string.Format(MessageContainer.IsMatchMessage, name));
+            return IsMatch(name, value, compare, string.Format(Messages.IsMatchMessage, name));
         }
 
         public Validator IsMatch(string name, string value, string compare, string message)
         {
             // do the check
-            if (!value.IsEqualTo(compare))
+            if (!value.IsMatch(compare))
             {
                 return AddError(name, message);
             }
@@ -308,83 +201,51 @@ namespace SimpleValidator
 
         #endregion
 
-        #region " IsMinLength "
+        #region " IsLength "
 
-        public Validator IsMinLength(string value, int min)
+        public Validator IsLength(string value, int min)
         {
-            return IsMinLength("", value, min);
+            return IsLength("", value, min);
         }
 
-        public Validator IsMinLength(string name, string value, int min)
+        public Validator IsLength(string name, string value, int min)
         {
-            return IsMinLength(name, value, min, string.Format(MessageContainer.IsMinLengthMessage, name, min));
+            return IsLength(name, value, min, string.Format(Messages.IsLengthMinMessage, name, min));
         }
 
-        public Validator IsMinLength(string name, string value, int min, string message)
+        public Validator IsLength(string name, string value, int min, string message)
         {
             // do the check
-            if (value.IsMinLength(min))
-            {
-                return NoError();
-            }
-            else
+            if (!value.IsLength(min))
             {
                 return AddError(name, message);
             }
-        }
-
-        #endregion
-
-        #region " IsMaxLength "
-
-        public Validator IsMaxLength(string value, int max)
-        {
-            return IsMaxLength("", value, max);
-        }
-
-        public Validator IsMaxLength(string name, string value, int max)
-        {
-            return IsMaxLength(name, value, max, string.Format(MessageContainer.IsMaxLengthMessage, name, max));
-        }
-
-        public Validator IsMaxLength(string name, string value, int max, string message)
-        {
-            // do the check
-            if (value.IsMaxLength(max))
-            {
-                return NoError();
-                
-            }
             else
-            {
-                return AddError(name, message);
-            }
-        }
-
-        #endregion
-
-        #region " IsBetweenLength "
-
-        public Validator IsBetweenLength(string value, int min, int max)
-        {
-            return IsBetweenLength("", value, min, max);
-        }
-
-        public Validator IsBetweenLength(string name, string value, int min, int max)
-        {
-            return IsBetweenLength(name, value, min, max, string.Format(MessageContainer.IsBetweenLengthMessage, name, min, max));
-        }
-
-        public Validator IsBetweenLength(string name, string value, int min, int max, string message)
-        {
-            // do the check
-            if (value.IsBetweenLength(min, max))
             {
                 return NoError();
             }
-            else
+        }
+
+        public Validator IsLength(string value, int min, int max)
+        {
+            return IsLength("", value, min, max);
+        }
+
+        public Validator IsLength(string name, string value, int min, int max)
+        {
+            return IsLength(name, value, min, max, string.Format(Messages.IsLengthMinMaxMessage, name, min, max));
+        }
+
+        public Validator IsLength(string name, string value, int min, int max, string message)
+        {
+            // do the check
+            if (!value.IsLength(min, max))
             {
                 return AddError(name, message);
+            }
+            else
+            {
+                return NoError();
             }
         }
 
@@ -399,7 +260,7 @@ namespace SimpleValidator
 
         public Validator IsExactLength(string name, string value, int exact)
         {
-            return IsExactLength(name, value, exact, string.Format(MessageContainer.IsExactLengthMessage, name, exact));
+            return IsExactLength(name, value, exact, string.Format(Messages.NotEmptyMessage, name, exact));
         }
 
         public Validator IsExactLength(string name, string value, int exact, string message)
@@ -417,86 +278,57 @@ namespace SimpleValidator
 
         #endregion
 
-        #region " Is "
+        #region " Must "
 
-        public Validator Is(Func<bool> func)
+        public Validator Must(Func<bool> func)
         {
-            return Is("", func);
+            return Must("", func);
         }
 
-        public Validator Is(string name, Func<bool> func)
+        public Validator Must(string name, Func<bool> func)
         {
-            return Is(name, func, MessageContainer.IsMessage);
+            return Must(name, func, Messages.MustMessage);
         }
 
-        public Validator Is(string name, Func<bool> func, string message)
-        {
-            // do the check
-            if (func())
-            {
-                return NoError();
-            }
-            else
-            {
-                return AddError(name, message);
-            }
-        }
-
-        #endregion
-
-        #region " IsNot "
-
-        public Validator IsNot(Func<bool> func)
-        {
-            return IsNot("", func);
-        }
-
-        public Validator IsNot(string name, Func<bool> func)
-        {
-            return IsNot(name, func, MessageContainer.IsNotMessage);
-        }
-
-        public Validator IsNot(string name, Func<bool> func, string message)
+        public Validator Must(string name, Func<bool> func, string message)
         {
             // do the check
             if (func())
             {
-                return AddError(name, message);
+                return NoError();
             }
             else
             {
-                return NoError();
+                return AddError(name, message);
             }
         }
 
         #endregion
 
-        #region " IsRule "
+        #region " MustNot "
 
-        public Validator IsRule(IRule rule)
+        public Validator MustNot(Func<bool> func)
         {
-            return IsRule("", rule);
+            return MustNot("", func);
         }
 
-        public Validator IsRule(string name, IRule rule)
+        public Validator MustNot(string name, Func<bool> func)
         {
-            return IsRule(name, rule, MessageContainer.IsRuleMessage);
+            return MustNot(name, func, Messages.MustNotMessage);
         }
 
-        public Validator IsRule(string name, IRule rule, string message)
+        public Validator MustNot(string name, Func<bool> func, string message)
         {
             // do the check
-            if (name.IsRule(rule))
-            {
-                return NoError();
-            }
-            else
+            if (func())
             {
                 return AddError(name, message);
             }
+            else
+            {
+                return NoError();
+            }
         }
-
-        #endregion
 
         #endregion
 
@@ -528,19 +360,6 @@ namespace SimpleValidator
             _LastError = error;
 
             return this;
-        }
-
-        public void ThrowValidationException()
-        {
-            throw new Exceptions.ValidationException(this);
-        }
-
-        public void ThrowValidationExceptionIfInvalid()
-        {
-            if (!IsValid)
-            {
-                throw new Exceptions.ValidationException(this);
-            }
         }
 
         protected Validator NoError()

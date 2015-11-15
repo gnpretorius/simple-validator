@@ -2,26 +2,20 @@
 using SimpleValidator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Collections.Generic;
-using System.Net;
-using SimpleValidator.Exceptions;
-using SimpleValidator.Extensions;
 
 namespace SimpleValidator.Tests
 {
 	[TestClass]
-	public class Validator_IsEmail_Tests
+	public class EmailTests
 	{
 		[TestMethod]
 		public void Test_Invalid_Email()
 		{
-
-            string email = "InvalidEmail";
+			string email = "InvalidEmail";
 
 			Validator validator = new Validator();
 
 			validator.IsEmail(email);
-
-            System.Diagnostics.Debug.WriteLine(validator.Errors.Count);
 
 			Assert.IsTrue(validator.Errors.Count == 1);
 		}
@@ -38,7 +32,7 @@ namespace SimpleValidator.Tests
 				"v@.co", // invalid
 				"v@v" // invalid
 			};
-            
+
 			Validator validator = new Validator();
 
 			foreach (var email in emails)
