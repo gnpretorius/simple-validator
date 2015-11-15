@@ -21,6 +21,16 @@ namespace SimpleValidator.Extensions
         }
 
         /// <summary>
+        /// Check if the value is not equal to null
+        /// </summary>
+        /// <param name="value">The value to check</param>
+        /// <returns>True if the value is not null</returns>
+        public static bool NotNull(this object value)
+        {
+            return (value != null);
+        }
+
+        /// <summary>
         /// Check if the integer is equal to zero
         /// </summary>
         /// <param name="value"></param>
@@ -44,6 +54,24 @@ namespace SimpleValidator.Extensions
             else
             {
                 return (value.Length == 0);
+            }
+
+        }
+
+        /// <summary>
+        /// Check if the value is an empty string i.e. length == 0 (Also checks for null)
+        /// </summary>
+        /// <param name="value">The value to check</param>
+        /// <returns>True if the value is not null or it's length != 0</returns>
+        public static bool NotEmpty(this string value)
+        {
+            if (value.IsNull())
+            {
+                return false; // if an item is null, it must be empty
+            }
+            else
+            {
+                return (value.Length != 0);
             }
 
         }
