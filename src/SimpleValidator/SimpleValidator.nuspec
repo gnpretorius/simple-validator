@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>$version$</version>
+    <authors>Gordon Pretorius</authors>
+    <owners>Gordon Pretorius</owners>
+    <licenseUrl>https://opensource.org/licenses/MIT</licenseUrl>
+    <projectUrl>https://github.com/gnpretorius/simple-validator</projectUrl>
+    <iconUrl>https://cloud.githubusercontent.com/assets/3989178/11175818/537a7430-8c2e-11e5-8d97-b136d8f7aa78.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes>This is a breaking change update. Updated and restructured some classes. Added type checking for dates, numbers etc.</releaseNotes>
+    <copyright>Copyright 2015</copyright>
+    <tags>Validation Net BusinessRule Validator TypeChecking</tags>
+  </metadata>
+</package>
