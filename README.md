@@ -163,9 +163,8 @@ It supports chaining so you could write it as follows
 ```
 validator
   .IsEmail("test@email.com")
-  .IsEmail("Email", "test@email.com")
-  .IsEmail("Email", "test@email.com");
-     .WithMessage("The email address field provided is not valid")
+  .IsEmail("Email", "test@email.com", "This is an error message")
+  .IsEmail("Email", "test@email.com").WithMessage("This is an error message")
 ```
 
 This is quite usefull for more complex object validation e.g.
@@ -298,7 +297,8 @@ try
     
     if (result.IsValid())
     {
-        // all good
+        // all good and you have access to the return user
+        return Content(result.Result.Name); // The return users name...
     }
     else
     {
@@ -315,7 +315,7 @@ catch (Exception ex)
 ```
 
 It's a cleaner approach, allows you to specify complex return types and provides a boolean indication reflecting the validation state of the current object. You could use simple out param's and use a boolean return 
-type for all methods, but I'm not a fun (That doesn't mean it's not right)
+type for all methods, but I'm not a fan (That doesn't mean it's not right)
 
  
 
