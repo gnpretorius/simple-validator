@@ -22,7 +22,8 @@ As there is quite a bit to cover I'm going to start simply, and add complexity.
 ## Structure
 
 There is 2 types of validation you can perform using SimpleValidator. **Extension methods** and **Validator**. The validator 
-essentially uses the extension methods behind the scenes but provides a useful wrapper for doing your validations. 
+essentially uses the extension methods behind the scenes but provides a useful wrapper for doing your validations and groups the error messages in a 
+meaningful way.
 
 ## Extension methods
 
@@ -73,6 +74,7 @@ The full list of extension methods is as follows:
 [object].IsDouble
 [object].IsBool
 [object].IsNumber
+[object].Is<T>
 
 // integer (same dor double, decimal, short and long)
 [integer].IsNotZero
@@ -95,6 +97,30 @@ The full list of extension methods is as follows:
 [datetime].IsLessThanOrEqualToDateOnly
 [datetime].IsEqualToDateOnly
 [datetime].IsBetweenDateOnly
+```
+
+From here you also have access to some helpful conversion methods, e.g.
+
+```
+string input = "5";
+
+if (input.IsInt())
+    return input.ToInt();
+```
+
+A full list of these are as follows
+
+```
+.ToInt()
+.ToShort()
+.ToLong()
+.ToDouble()
+.ToDecimal()
+.ToBool()
+
+// and then a more generic one
+.To<T>()
+
 ```
 
 ## Validator
