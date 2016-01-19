@@ -23,5 +23,17 @@ namespace SimpleValidator.Messages
         public string IsMatchMessage { get; set; }
         public string IsDateMessage { get; set; }
         public string IsRuleMessage { get; set; }
+
+        #region " Dates "
+
+        public string IsGreaterThanMessage { get; set; }
+        public string IsGreaterThanOrEqualToMessage { get; set; }
+        public string IsLessThanMessage { get; set; }
+        public string IsLessThanOrEqualToMessage { get; set; }
+        public string IsEqualToMessage { get; set; }
+        public string IsBetweenInclusiveMessage { get; set; }
+        public string IsBetweenExclusiveMessage { get; set; }
+
+        #endregion
     }
 }

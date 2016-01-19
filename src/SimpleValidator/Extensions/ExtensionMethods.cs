@@ -421,41 +421,16 @@ namespace SimpleValidator.Extensions
             return value == compare;
         }
 
-        public static bool IsBetween(this DateTime value, DateTime from, DateTime to)
+        public static bool IsBetweenInclusive(this DateTime value, DateTime from, DateTime to)
         {
             return value >= from && value <= to;
         }
 
-        public static bool IsGreaterThanDateOnly(this DateTime value, DateTime compare)
+        public static bool IsBetweenExclusive(this DateTime value, DateTime from, DateTime to)
         {
-            return value.Date > compare.Date;
+            return value > from && value < to;
         }
-
-        public static bool IsGreaterThanOrEqualToDateOnly(this DateTime value, DateTime compare)
-        {
-            return value.Date >= compare.Date;
-        }
-
-        public static bool IsLessThanDateOnly(this DateTime value, DateTime compare)
-        {
-            return value.Date < compare.Date;
-        }
-
-        public static bool IsLessThanOrEqualToDateOnly(this DateTime value, DateTime compare)
-        {
-            return value.Date <= compare.Date;
-        }
-
-        public static bool IsEqualToDateOnly(this DateTime value, DateTime compare)
-        {
-            return value.Date == compare.Date;
-        }
-
-        public static bool IsBetweenDateOnly(this DateTime value, DateTime from, DateTime to)
-        {
-            return value.Date >= from.Date && value.Date <= to.Date;
-        }
-
+        
         #endregion
 
         #endregion
@@ -616,9 +591,10 @@ namespace SimpleValidator.Extensions
         public static bool IsNumber(this object value)
         {
             return
-                value.Is<Int32>() ||
-                value.Is<Double>() ||
-                value.Is<Decimal>();
+                value.IsLong() ||
+                value.IsDouble() ||
+                value.IsDecimal() ||
+                value.IsDouble();
         }
 
         #endregion

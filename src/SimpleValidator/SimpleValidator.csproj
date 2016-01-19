@@ -49,6 +49,7 @@
     <Compile Include="Results\ValidationError.cs" />
     <Compile Include="Results\ValidationMethodResult.cs" />
     <Compile Include="Validator.cs" />
+    <Compile Include="Validator.Numbers.cs" />
     <Compile Include="Validator.Dates.cs" />
   </ItemGroup>
   <ItemGroup>

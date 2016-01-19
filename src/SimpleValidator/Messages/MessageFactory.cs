@@ -42,7 +42,16 @@ namespace SimpleValidator.Messages
                         IsRegexMessage = "'{0}' does not match the provided regular expression.",
                         IsMatchMessage = "'{0}' did not match the specified criteria.",
                         IsDateMessage = "'{0}' is not a valid date.",
-                        IsRuleMessage = "'{0}' failed the provided business rule provided."
+                        IsRuleMessage = "'{0}' failed the provided business rule provided.",
+
+                        // Dates
+                        IsGreaterThanMessage = "'{0}' must be greater than '{1}'.",
+                        IsGreaterThanOrEqualToMessage =  "'{0}' must be greater than or equal to '{1}'.",
+                        IsLessThanMessage =  "'{0}' must be less than '{1}'.",
+                        IsLessThanOrEqualToMessage = "'{0}' must be less than or equal to '{1}'.",
+                        IsEqualToMessage = "'{0}' must be equal to '{1}'.",
+                        IsBetweenInclusiveMessage = "'{0}' must be between '{1}' and '{2}' (inclusive).",
+                        IsBetweenExclusiveMessage = "'{0}' must be between '{1}' and '{2}' (exclusive)."
                     };
 
                 default:
