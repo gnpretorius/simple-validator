@@ -10,7 +10,7 @@
     <iconUrl>https://cloud.githubusercontent.com/assets/3989178/11175818/537a7430-8c2e-11e5-8d97-b136d8f7aa78.png</iconUrl>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <description>$description$</description>
-    <releaseNotes>This is a breaking change update. Updated and restructured some classes. Added type checking for dates, numbers etc.</releaseNotes>
+    <releaseNotes>Latest version. Getting to a stage where I will make it a 1.0 release. This might contain some breaking changes.</releaseNotes>
     <copyright>Copyright 2015</copyright>
     <tags>Validation Net BusinessRule Validator TypeChecking</tags>
   </metadata>

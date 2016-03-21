@@ -10,7 +10,7 @@ namespace SimpleValidator.Tests
     public class Validator_Is_Tests
     {
         [TestMethod]
-        public void Test_IsGreaterThan()
+        public void IsGreaterThanTest()
         {
             Validator validator = new Validator();
 
