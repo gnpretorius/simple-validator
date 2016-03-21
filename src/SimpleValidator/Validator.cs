@@ -65,6 +65,7 @@ namespace SimpleValidator
         }
 
         #endregion
+<<<<<<< HEAD
 
         #region " NotZero "
 
@@ -279,6 +280,10 @@ namespace SimpleValidator
         #endregion
 
         #region " Must "
+=======
+       
+        #region " Is "
+>>>>>>> trunk
 
         public Validator Must(Func<bool> func)
         {

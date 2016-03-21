@@ -53,6 +53,21 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+<<<<<<< HEAD
+=======
+    <Compile Include="Extensions_Tests.cs" />
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Validator_Is_Tests.cs" />
+    <Compile Include="Validator_Date_Tests.cs" />
+    <Compile Include="Extensions_Is_Tests.cs" />
+    <Compile Include="Validator_IsNotNull_Tests.cs" />
+    <Compile Include="Extensions_IsNotNull_Tests.cs" />
+    <Compile Include="Validator_IsMatch_Tests.cs" />
+>>>>>>> trunk
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="EmailTests.cs" />
     <Compile Include="ValidatorTests.cs" />

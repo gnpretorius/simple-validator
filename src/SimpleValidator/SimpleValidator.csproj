@@ -45,6 +45,15 @@
     <Compile Include="Results\ValidationError.cs" />
     <Compile Include="Results\ValidationMethodResult.cs" />
     <Compile Include="Validator.cs" />
+<<<<<<< HEAD
+=======
+    <Compile Include="Validator.Strings.cs" />
+    <Compile Include="Validator.Numbers.cs" />
+    <Compile Include="Validator.Dates.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Utilities\" />
+>>>>>>> trunk
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
