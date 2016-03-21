@@ -1,9 +1,7 @@
 # SimpleValidator
+
 A simple .Net validation library written in C#
 
-<<<<<<< HEAD
-It's based largely on the [FluentValidation](https://github.com/JeremySkinner/FluentValidation) libary with some changes in it's usage. More documentation to come.
-=======
 It's based largely on the [FluentValidation](https://github.com/JeremySkinner/FluentValidation) libary with some changes in it's usage. 
 
 ## Why SimpleValidator?
@@ -321,4 +319,3 @@ type for all methods, but I'm not a fan (That doesn't mean it's not right)
 
  
 
->>>>>>> trunk
