@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
     <PropertyGroup>
         <AssemblyName>SimpleValidator</AssemblyName>
-        <PackageId>$id$</PackageId>
+        <PackageId>SimpleValidator</PackageId>
     </PropertyGroup>
     
     <PropertyGroup>
