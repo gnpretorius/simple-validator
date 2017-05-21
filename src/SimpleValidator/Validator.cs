@@ -237,12 +237,18 @@ namespace SimpleValidator
             throw new Exceptions.ValidationException(this);
         }
 
-        public void ThrowValidationExceptionIfInvalid()
+        /// <summary>
+        /// Throws an exception if errors are found 
+        /// </summary>
+        /// <returns>If no errors are found it returns an instance of the validator. </returns>
+        public Validator ThrowValidationExceptionIfInvalid()
         {
             if (!IsValid)
             {
                 throw new Exceptions.ValidationException(this);
             }
+
+            return this;
         }
 
         protected Validator NoError()
