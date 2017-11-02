@@ -19,7 +19,7 @@ namespace SimpleValidator.Tests.Properties {
     // class via a tool like ResGen or Visual Studio.
     // To add or remove a member, edit your .ResX file then rerun ResGen
     // with the /str option, or rebuild your VS project.
-    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "4.0.0.0")]
+    [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Resources.Tools.StronglyTypedResourceBuilder", "15.0.0.0")]
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
     [global::System.Runtime.CompilerServices.CompilerGeneratedAttribute()]
     internal class Resources {
@@ -64,7 +64,6 @@ namespace SimpleValidator.Tests.Properties {
         ///   Looks up a localized string similar to #	Reserved Strings
         ///#
         ///#	Strings which may be used elsewhere in code
-        ///
         ///undefined
         ///undef
         ///null
@@ -79,7 +78,10 @@ namespace SimpleValidator.Tests.Properties {
         ///None
         ///\
         ///\\
-        ///
+        /// 
+        ///  
+        ///   
+        ///    
         ///#	Numeric Strings
         ///#
         ///#	Strings which can be interpreted as numeric
@@ -120,8 +122,7 @@ namespace SimpleValidator.Tests.Properties {
         ///-
         ///-.
         ///-,
-        ///999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999999
-        /// [rest of string was truncated]&quot;;.
+        ///999999999999999999999999 [rest of string was truncated]&quot;;.
         /// </summary>
         internal static string Input {
             get {
